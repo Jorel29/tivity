@@ -1,0 +1,3 @@
+/home/jorel/projects/task/build/CMakeFiles/TaskTest.dir
+/home/jorel/projects/task/build/CMakeFiles/edit_cache.dir
+/home/jorel/projects/task/build/CMakeFiles/rebuild_cache.dir
