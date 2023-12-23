@@ -1,13 +1,19 @@
 #include "task.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 #define DBG(txt, x) std::cout<< txt << x << std::endl;
+
+int new_task(&std::vector<Task> t_list)
+{
+  DBG("new task function", "t_list")
+}
 
 int main()
 {
   char input;
-  std::vector<Task> TaskList;
+  std::vector<Task> m_task_list;
   while(true)
   {
     std::cout << "Welcome to tivity!" << std::endl;
@@ -25,9 +31,11 @@ int main()
       case 'v':
         //prompt view task menu
         DBG("view task", input)
+        break;
       case 'm':
         //manage tasks menu
         DBG("manage tasks", input)
+        break;
       default:
         DBG("invalid input", input)
         break;
