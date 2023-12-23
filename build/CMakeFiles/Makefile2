@@ -54,16 +54,16 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jorel/projects/task
+CMAKE_SOURCE_DIR = /home/jorel/projects/tivity/task
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jorel/projects/task/build
+CMAKE_BINARY_DIR = /home/jorel/projects/tivity/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/TaskTest.dir/all
+all: CMakeFiles/TaskManager.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/TaskTest.dir/clean
+clean: CMakeFiles/TaskManager.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/TaskTest.dir
+# Target rules for target CMakeFiles/TaskManager.dir
 
 # All Build rule for target.
-CMakeFiles/TaskTest.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jorel/projects/task/build/CMakeFiles --progress-num=1,2,3 "Built target TaskTest"
-.PHONY : CMakeFiles/TaskTest.dir/all
+CMakeFiles/TaskManager.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jorel/projects/tivity/build/CMakeFiles --progress-num=1,2,3 "Built target TaskManager"
+.PHONY : CMakeFiles/TaskManager.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/TaskTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/task/build/CMakeFiles 3
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TaskTest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/task/build/CMakeFiles 0
-.PHONY : CMakeFiles/TaskTest.dir/rule
+CMakeFiles/TaskManager.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/tivity/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TaskManager.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/tivity/build/CMakeFiles 0
+.PHONY : CMakeFiles/TaskManager.dir/rule
 
 # Convenience name for target.
-TaskTest: CMakeFiles/TaskTest.dir/rule
-.PHONY : TaskTest
+TaskManager: CMakeFiles/TaskManager.dir/rule
+.PHONY : TaskManager
 
 # clean rule for target.
-CMakeFiles/TaskTest.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/clean
-.PHONY : CMakeFiles/TaskTest.dir/clean
+CMakeFiles/TaskManager.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/clean
+.PHONY : CMakeFiles/TaskManager.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

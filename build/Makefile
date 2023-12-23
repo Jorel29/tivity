@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jorel/projects/task
+CMAKE_SOURCE_DIR = /home/jorel/projects/tivity/task
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jorel/projects/task/build
+CMAKE_BINARY_DIR = /home/jorel/projects/tivity/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/task/build/CMakeFiles /home/jorel/projects/task/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/tivity/build/CMakeFiles /home/jorel/projects/tivity/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/task/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jorel/projects/tivity/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,65 +117,65 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named TaskTest
+# Target rules for targets named TaskManager
 
 # Build rule for target.
-TaskTest: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TaskTest
-.PHONY : TaskTest
+TaskManager: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TaskManager
+.PHONY : TaskManager
 
 # fast build rule for target.
-TaskTest/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/build
-.PHONY : TaskTest/fast
+TaskManager/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/build
+.PHONY : TaskManager/fast
 
-src/task.o: src/task.cpp.o
-.PHONY : src/task.o
-
-# target to build an object file
-src/task.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/src/task.cpp.o
-.PHONY : src/task.cpp.o
-
-src/task.i: src/task.cpp.i
-.PHONY : src/task.i
-
-# target to preprocess a source file
-src/task.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/src/task.cpp.i
-.PHONY : src/task.cpp.i
-
-src/task.s: src/task.cpp.s
-.PHONY : src/task.s
-
-# target to generate assembly for a file
-src/task.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/src/task.cpp.s
-.PHONY : src/task.cpp.s
-
-src/unit_test.o: src/unit_test.cpp.o
-.PHONY : src/unit_test.o
+task.o: task.cpp.o
+.PHONY : task.o
 
 # target to build an object file
-src/unit_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/src/unit_test.cpp.o
-.PHONY : src/unit_test.cpp.o
+task.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/task.cpp.o
+.PHONY : task.cpp.o
 
-src/unit_test.i: src/unit_test.cpp.i
-.PHONY : src/unit_test.i
+task.i: task.cpp.i
+.PHONY : task.i
 
 # target to preprocess a source file
-src/unit_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/src/unit_test.cpp.i
-.PHONY : src/unit_test.cpp.i
+task.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/task.cpp.i
+.PHONY : task.cpp.i
 
-src/unit_test.s: src/unit_test.cpp.s
-.PHONY : src/unit_test.s
+task.s: task.cpp.s
+.PHONY : task.s
 
 # target to generate assembly for a file
-src/unit_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskTest.dir/build.make CMakeFiles/TaskTest.dir/src/unit_test.cpp.s
-.PHONY : src/unit_test.cpp.s
+task.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/task.cpp.s
+.PHONY : task.cpp.s
+
+tivity_manager.o: tivity_manager.cpp.o
+.PHONY : tivity_manager.o
+
+# target to build an object file
+tivity_manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/tivity_manager.cpp.o
+.PHONY : tivity_manager.cpp.o
+
+tivity_manager.i: tivity_manager.cpp.i
+.PHONY : tivity_manager.i
+
+# target to preprocess a source file
+tivity_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/tivity_manager.cpp.i
+.PHONY : tivity_manager.cpp.i
+
+tivity_manager.s: tivity_manager.cpp.s
+.PHONY : tivity_manager.s
+
+# target to generate assembly for a file
+tivity_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskManager.dir/build.make CMakeFiles/TaskManager.dir/tivity_manager.cpp.s
+.PHONY : tivity_manager.cpp.s
 
 # Help Target
 help:
@@ -185,13 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... TaskTest"
-	@echo "... src/task.o"
-	@echo "... src/task.i"
-	@echo "... src/task.s"
-	@echo "... src/unit_test.o"
-	@echo "... src/unit_test.i"
-	@echo "... src/unit_test.s"
+	@echo "... TaskManager"
+	@echo "... task.o"
+	@echo "... task.i"
+	@echo "... task.s"
+	@echo "... tivity_manager.o"
+	@echo "... tivity_manager.i"
+	@echo "... tivity_manager.s"
 .PHONY : help
 
 
