@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
-#define DBG(txt, x) std::cout<< txt << x << std::endl;
+#define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
 
-int new_task(&std::vector<Task> t_list)
+void new_task(std::vector<Task> &t_list)
 {
   DBG("new task function", "t_list")
 }
@@ -27,6 +27,7 @@ int main()
       case 'n':
         //Prompt new task menu
         DBG("new task", input)
+        new_task(m_task_list);
         break;
       case 'v':
         //prompt view task menu
