@@ -5,7 +5,7 @@
 
 #define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
 
-void new_task(std::vector<Task> &t_list, unsigned int &currid)
+void new_task(std::vector<Task> &t_list, unsigned int &curr_id)
 {
   std::string desc;
   unsigned int priority;
@@ -14,6 +14,7 @@ void new_task(std::vector<Task> &t_list, unsigned int &currid)
   std::cin >> desc;
   std::cout <<"What priority is this task?" << std::endl;
   std::cin >> priority;
+
   while(std::cin.fail())
   {
     std::cin.clear();
@@ -21,7 +22,21 @@ void new_task(std::vector<Task> &t_list, unsigned int &currid)
     std::cout << "Invalid input, put in a number" << std::endl;
     std::cin >> priority;
   }
-}
+  Task new_task = Task(curr_id, priority, desc);
+  t_list.push_back(new_task);
+};
+
+void view_tasks(std::vector<Task> &t_list)
+{
+  if (t_list.empty())
+  {
+    std::cout << "There are no tasks" << std::endl;
+  }
+  for (Task a_task : t_list)
+  {
+    std::cout << a_task.get_priority() << " " << a_task.get_desc() << std::endl;
+  };
+};
 
 int main()
 {
@@ -46,6 +61,7 @@ int main()
       case 'v':
         //prompt view task menu
         DBG("view task", input)
+        view_tasks(m_task_list);
         break;
       case 'm':
         //manage tasks menu
