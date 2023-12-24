@@ -5,13 +5,27 @@
 
 #define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
 
-void new_task(std::vector<Task> &t_list)
+void new_task(std::vector<Task> &t_list, unsigned int &currid)
 {
+  std::string desc;
+  unsigned int priority;
   DBG("new task function", "t_list")
+  std::cout << "Write a description for this new task" << std::endl;
+  std::cin >> desc;
+  std::cout <<"What priority is this task?" << std::endl;
+  std::cin >> priority;
+  while(std::cin.fail())
+  {
+    std::cin.clear();
+    std::cin.ignore(256, '\n');
+    std::cout << "Invalid input, put in a number" << std::endl;
+    std::cin >> priority;
+  }
 }
 
 int main()
 {
+  unsigned int taskids = 0;
   char input;
   std::vector<Task> m_task_list;
   while(true)
@@ -27,7 +41,7 @@ int main()
       case 'n':
         //Prompt new task menu
         DBG("new task", input)
-        new_task(m_task_list);
+        new_task(m_task_list, taskids);
         break;
       case 'v':
         //prompt view task menu
