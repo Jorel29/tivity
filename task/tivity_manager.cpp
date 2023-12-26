@@ -1,5 +1,7 @@
 #include "task.h"
 #include <iostream>
+#include <ios>
+#include <limits>
 #include <string>
 #include <vector>
 
@@ -18,12 +20,13 @@ void new_task(std::vector<Task> &t_list, unsigned int &curr_id)
   while(std::cin.fail())
   {
     std::cin.clear();
-    std::cin.ignore(256, '\n');
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Invalid input, put in a number" << std::endl;
     std::cin >> priority;
   }
   Task new_task = Task(curr_id, priority, desc);
   t_list.push_back(new_task);
+  curr_id++;
 };
 
 void view_tasks(std::vector<Task> &t_list)
@@ -34,8 +37,26 @@ void view_tasks(std::vector<Task> &t_list)
   }
   for (Task a_task : t_list)
   {
-    std::cout << a_task.get_priority() << " " << a_task.get_desc() << std::endl;
+    std::cout << "ID: " << a_task.get_taskid() << "priority: "<< a_task.get_priority() << " desc: " << a_task.get_desc() << std::endl;
   };
+};
+
+void manage_tasks(std::vector<Task> &t_list)
+{
+  view_tasks(t_list);
+  unsigned int taskid;
+  std::cout << "Select a task" << std::endl;
+  std::cin >> taskid;
+  while(std::cin.fail())
+  {
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Invalid input, input a proper id (positive integer)" << std::endl;
+    std::cin >> taskid;
+  };
+
+  std::cout << "Managing task: " << taskid << std::endl;
+  //prompt different edit modes - marking completeness, priority, description
 };
 
 int main()
@@ -66,6 +87,7 @@ int main()
       case 'm':
         //manage tasks menu
         DBG("manage tasks", input)
+        manage_tasks(m_task_list);
         break;
       default:
         DBG("invalid input", input)
