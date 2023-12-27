@@ -1,5 +1,6 @@
 #include "task.h"
 #include <string>
+#include <iostream>
 
 #define DEFAULT_DESC "Write a description for this task..."
 
@@ -69,3 +70,10 @@ const bool Task::is_complete()
 	return m_is_complete;
 };
 
+std::ostream& operator<<(std::ostream& os, const Task& t)
+{
+  os << "is_complete:" << t.m_is_complete << " task_id:" << t.m_taskID;
+  os << " priority:" << t.m_priority << std::endl;
+  os << " description: " << t.m_desc;
+  return os;
+};

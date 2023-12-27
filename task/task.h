@@ -34,4 +34,6 @@ class Task
 		const std::string get_desc();
 		
 		const bool is_complete();
+
+    friend std::ostream& operator<<(std::ostream& os, const Task& t);
 };

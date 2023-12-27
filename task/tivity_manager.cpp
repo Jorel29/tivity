@@ -13,7 +13,8 @@ void new_task(std::vector<Task> &t_list, unsigned int &curr_id)
   unsigned int priority;
   DBG("new task function", "t_list")
   std::cout << "Write a description for this new task" << std::endl;
-  std::cin >> desc;
+  std::cin.ignore();
+  std::getline(std::cin, desc); 
   std::cout <<"What priority is this task?" << std::endl;
   std::cin >> priority;
 
@@ -37,7 +38,7 @@ void view_tasks(std::vector<Task> &t_list)
   }
   for (Task a_task : t_list)
   {
-    std::cout << "ID: " << a_task.get_taskid() << "priority: "<< a_task.get_priority() << " desc: " << a_task.get_desc() << std::endl;
+    std::cout << a_task << std::endl;
   };
 };
 
@@ -57,6 +58,47 @@ void manage_tasks(std::vector<Task> &t_list)
 
   std::cout << "Managing task: " << taskid << std::endl;
   //prompt different edit modes - marking completeness, priority, description
+  /*
+   * each mode will have their own prompt function
+   */
+  Task managed_task;
+  for (Task task : t_list)
+  {
+    if (task.get_taskid() == taskid)
+    {
+      managed_task = task;
+      break;
+    };
+  };
+
+  std::cout << managed_task << std::endl; 
+  char input;
+  while (true) {
+    
+    std::cout << "Task Status (s)   Set Priority (p)   Edit Desc (d)   End Management(q)" << std::endl;
+    std::cin >> input;
+    if(input == 'q') break;
+
+    switch (input) {
+      case 's':
+        DBG("Edit Task Status ", input)
+        break;
+
+      case 'p':
+        DBG("Set Priority ", input)
+        break;
+
+      case 'd':
+        DBG("Edit Description ", input)
+        break;
+
+      default:
+        DBG("Invalid input ", input)
+        break;
+    }
+  }
+  
+
 };
 
 int main()
