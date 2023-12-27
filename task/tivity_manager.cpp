@@ -42,6 +42,24 @@ void view_tasks(std::vector<Task> &t_list)
   };
 };
 
+void edit_desc(Task &task)
+{
+  std::string new_desc;
+  std::cout << "Write a new description for this task" << std::endl;
+  std::cin.ignore();
+  std::getline(std::cin, new_desc);
+  while(std::cin.fail())
+  {
+    std::cin.clear(); 
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Invalid input, put in a proper description" << std::endl;
+    std::cin.ignore();
+    std::getline(std::cin, new_desc);
+  }
+
+  task.edit_desc(new_desc);
+};
+
 void manage_tasks(std::vector<Task> &t_list)
 {
   view_tasks(t_list);
@@ -75,9 +93,9 @@ void manage_tasks(std::vector<Task> &t_list)
   char input;
   while (true) {
     
-    std::cout << "Task Status (s)   Set Priority (p)   Edit Desc (d)   End Management(q)" << std::endl;
+    std::cout << "Task Status (s)   Set Priority (p)   Edit Desc (d)   Exit Management(e)" << std::endl;
     std::cin >> input;
-    if(input == 'q') break;
+    if(input == 'e') break;
 
     switch (input) {
       case 's':
@@ -90,6 +108,7 @@ void manage_tasks(std::vector<Task> &t_list)
 
       case 'd':
         DBG("Edit Description ", input)
+        edit_desc(managed_task);
         break;
 
       default:
