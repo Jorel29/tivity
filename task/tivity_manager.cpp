@@ -42,6 +42,50 @@ void view_tasks(std::vector<Task> &t_list)
   };
 };
 
+void edit_status(Task &task)
+{
+  char input;
+  while(true)
+  {
+    std::cout << "Status: " << task.is_complete() << std::endl;
+    std::cout << "Mark Complete(c)   Mark Incomplete(i) Done Marking(d)" << std::endl;
+    std::cin >> input;
+    if (input == 'd') break;
+
+    switch(input)
+    {
+      case 'c':
+        task.mark_complete();
+        break;
+      case 'i':
+        task.mark_incomplete();
+        break;
+      default:
+        DBG("Invalid input ", input)
+        break;
+    }
+
+  }
+
+};
+
+void set_priority(Task &task)
+{
+  unsigned int new_priority;
+  std::cout << "Write a new priority for this task" << std::endl;
+  std::cin >> new_priority;
+  while(std::cin.fail())
+  {
+    std::cin.clear(); 
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Invalid input, put in a proper priority" << std::endl;
+    std::cin >> new_priority;
+  }
+  
+  task.set_priority(new_priority);
+};
+
+
 void edit_desc(Task &task)
 {
   std::string new_desc;
@@ -79,20 +123,12 @@ void manage_tasks(std::vector<Task> &t_list)
   /*
    * each mode will have their own prompt function
    */
-  Task managed_task;
-  for (Task task : t_list)
-  {
-    if (task.get_taskid() == taskid)
-    {
-      managed_task = task;
-      break;
-    };
-  };
+  Task &managed_task = t_list[taskid];
 
-  std::cout << managed_task << std::endl; 
   char input;
-  while (true) {
-    
+  while (true) 
+  {
+    std::cout << managed_task << std::endl;
     std::cout << "Task Status (s)   Set Priority (p)   Edit Desc (d)   Exit Management(e)" << std::endl;
     std::cin >> input;
     if(input == 'e') break;
@@ -100,10 +136,12 @@ void manage_tasks(std::vector<Task> &t_list)
     switch (input) {
       case 's':
         DBG("Edit Task Status ", input)
+        edit_status(managed_task);
         break;
 
       case 'p':
         DBG("Set Priority ", input)
+        set_priority(managed_task);
         break;
 
       case 'd':
