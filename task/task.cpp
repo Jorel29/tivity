@@ -36,6 +36,14 @@ Task::Task(unsigned int id, unsigned int priority, std::string desc)
 	m_is_complete = false;
 };
 
+Task::Task(unsigned int id, bool is_complete, unsigned int priority, std::string desc)
+{
+  m_taskID = id;
+  m_priority = priority;
+  m_desc = desc;
+  m_is_complete = is_complete;
+};
+
 void Task::edit_desc(std::string new_desc)
 {
 	m_desc = new_desc;
@@ -72,8 +80,6 @@ const bool Task::is_complete()
 
 std::ostream& operator<<(std::ostream& os, const Task& t)
 {
-  os << "is_complete:" << t.m_is_complete << " task_id:" << t.m_taskID;
-  os << " priority:" << t.m_priority << std::endl;
-  os << " description: " << t.m_desc;
+  os << t.m_taskID << " " << t.m_is_complete << " " << t.m_priority << " " << t.m_desc << "\n";
   return os;
 };

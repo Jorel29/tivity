@@ -4,14 +4,60 @@
 #include <limits>
 #include <string>
 #include <vector>
+#include <fstream>
 
 #define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
+
+int read(std::vector<Task> &t_list)
+{
+  //need to find max id somehow (task ids need to be unique)
+  std::ifstream in;
+  in.open("output");
+
+  unsigned int taskid;
+  bool is_complete;
+  unsigned int priority;
+  char input_desc[1000];
+  std::string desc;
+  while(!in.fail()) 
+  {
+    if (in >> taskid >> is_complete >> priority)
+    {
+      in.getline(input_desc,1000,'\n'); 
+      desc = input_desc;
+      Task task = Task(taskid, is_complete, priority, desc);
+      DBG("existing task ", task)
+      t_list.push_back(task);
+    }
+  }
+    return 0;
+}
+
+int write(std::vector<Task> &t_list)
+{
+  std::ofstream out;
+  out.open("output", std::ios::app);
+  
+  for (Task task : t_list)
+  {
+    if(out.is_open())
+    {
+      out << task;
+    }
+    else 
+    {
+      return -1;
+    }
+  }
+  
+
+  return 0;
+}
 
 void new_task(std::vector<Task> &t_list, unsigned int &curr_id)
 {
   std::string desc;
   unsigned int priority;
-  DBG("new task function", "t_list")
   std::cout << "Write a description for this new task" << std::endl;
   std::cin.ignore();
   std::getline(std::cin, desc); 
@@ -135,17 +181,14 @@ void manage_tasks(std::vector<Task> &t_list)
 
     switch (input) {
       case 's':
-        DBG("Edit Task Status ", input)
         edit_status(managed_task);
         break;
 
       case 'p':
-        DBG("Set Priority ", input)
         set_priority(managed_task);
         break;
 
       case 'd':
-        DBG("Edit Description ", input)
         edit_desc(managed_task);
         break;
 
@@ -153,6 +196,7 @@ void manage_tasks(std::vector<Task> &t_list)
         DBG("Invalid input ", input)
         break;
     }
+    write(t_list);
   }
   
 
@@ -163,6 +207,7 @@ int main()
   unsigned int taskids = 0;
   char input;
   std::vector<Task> m_task_list;
+  read(m_task_list);
   while(true)
   {
     std::cout << "Welcome to tivity!" << std::endl;
@@ -175,21 +220,18 @@ int main()
     switch (input) {
       case 'n':
         //Prompt new task menu
-        DBG("new task", input)
         new_task(m_task_list, taskids);
         break;
       case 'v':
         //prompt view task menu
-        DBG("view task", input)
         view_tasks(m_task_list);
         break;
       case 'm':
         //manage tasks menu
-        DBG("manage tasks", input)
         manage_tasks(m_task_list);
         break;
       default:
-        DBG("invalid input", input)
+        DBG("Invalid input", input)
         break;
     }
   };

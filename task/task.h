@@ -19,7 +19,10 @@ class Task
 		Task(unsigned int id, unsigned int priority);
 
 		Task(unsigned int id, unsigned int priority, std::string desc);
-		void edit_desc(std::string new_desc);
+		
+    Task(unsigned int id, bool is_complete, unsigned int priority, std::string desc);
+
+    void edit_desc(std::string new_desc);
 
 		void mark_complete();
 
