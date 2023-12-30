@@ -7,6 +7,7 @@
 #include <fstream>
 
 #define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
+#define MAX_DESC_CHAR_LEN 1000
 
 int read(std::vector<Task> &t_list)
 {
@@ -17,13 +18,13 @@ int read(std::vector<Task> &t_list)
   unsigned int taskid;
   bool is_complete;
   unsigned int priority;
-  char input_desc[1000];
+  char input_desc[MAX_DESC_CHAR_LEN];
   std::string desc;
   while(!in.fail()) 
   {
     if (in >> taskid >> is_complete >> priority)
     {
-      in.getline(input_desc,1000,'\n'); 
+      in.getline(input_desc,MAX_DESC_CHAR_LEN,'\n'); 
       desc = input_desc;
       Task task = Task(taskid, is_complete, priority, desc);
       DBG("existing task ", task)
