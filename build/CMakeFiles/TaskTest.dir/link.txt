@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/TaskTest.dir/src/unit_test.cpp.o CMakeFiles/TaskTest.dir/src/task.cpp.o -o TaskTest 

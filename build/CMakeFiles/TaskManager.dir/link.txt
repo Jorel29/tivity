@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/TaskManager.dir/tivity_manager.cpp.o CMakeFiles/TaskManager.dir/task.cpp.o -o TaskManager 

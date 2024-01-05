@@ -1,3 +1,0 @@
-/home/jorel/projects/tivity/build/CMakeFiles/TaskManager.dir
-/home/jorel/projects/tivity/build/CMakeFiles/edit_cache.dir
-/home/jorel/projects/tivity/build/CMakeFiles/rebuild_cache.dir
