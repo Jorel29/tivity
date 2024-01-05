@@ -34,11 +34,11 @@ int read(std::vector<Task> &t_list)
     return 0;
 }
 
-int write(std::vector<Task> &t_list)
+int full_write(std::vector<Task> &t_list)
 {
   std::ofstream out;
-  out.open("output", std::ios::app);
-  
+  out.open("output", std::ios::out);
+
   for (Task task : t_list)
   {
     if(out.is_open())
@@ -47,9 +47,27 @@ int write(std::vector<Task> &t_list)
     }
     else 
     {
-      return -1;
+      return -1;  
     }
   }
+
+  return 0;
+}
+
+int write(Task &task)
+{
+  std::ofstream out;
+  out.open("output", std::ios::app);
+  
+  if(out.is_open())
+  {
+    out << task;
+  }
+  else 
+  {
+    return -1;
+  }
+  
   
 
   return 0;
@@ -166,19 +184,28 @@ void manage_tasks(std::vector<Task> &t_list)
   };
 
   std::cout << "Managing task: " << taskid << std::endl;
-  //prompt different edit modes - marking completeness, priority, description
-  /*
-   * each mode will have their own prompt function
-   */
   Task &managed_task = t_list[taskid];
 
   char input;
   while (true) 
   {
     std::cout << managed_task << std::endl;
-    std::cout << "Task Status (s)   Set Priority (p)   Edit Desc (d)   Exit Management(e)" << std::endl;
+    std::cout << "Task Status (s)   Set Priority (p)   Edit Desc (d)   Remove Task (r)  Exit Management(e)" << std::endl;
     std::cin >> input;
     if(input == 'e') break;
+    
+    if(input == 'r')
+    {
+      std::cout << "Would you like to remove this task? y / n" << std::endl;
+      std::cin >> input;
+      if (input == 'y')
+      {
+        t_list.erase(t_list.begin() + taskid);
+        break;
+      }else {
+        continue;
+      }
+    }
 
     switch (input) {
       case 's':
@@ -192,12 +219,12 @@ void manage_tasks(std::vector<Task> &t_list)
       case 'd':
         edit_desc(managed_task);
         break;
-
+      
       default:
         DBG("Invalid input ", input)
         break;
     }
-    write(t_list);
+    full_write(t_list);
   }
   
 
