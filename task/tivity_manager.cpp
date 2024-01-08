@@ -68,8 +68,6 @@ int write(Task &task)
     return -1;
   }
   
-  
-
   return 0;
 }
 
@@ -196,7 +194,7 @@ void manage_tasks(std::vector<Task> &t_list)
     
     if(input == 'r')
     {
-      std::cout << "Would you like to remove this task? y / n" << std::endl;
+      std::cout << "Would you like to remove this task? [y / n]" << std::endl;
       std::cin >> input;
       if (input == 'y')
       {
