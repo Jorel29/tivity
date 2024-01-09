@@ -9,7 +9,9 @@
 #define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
 #define MAX_DESC_CHAR_LEN 1000
 #define TASKFILE "tasks"
-
+//TODO - Be able to specify which file to read at startup
+//     - Create a task_manager API 
+//     - Specify which functions to expose to the user
 unsigned int read(std::vector<Task> &t_list)
 {
   //need to find max id somehow (task ids need to be unique)
