@@ -8,22 +8,28 @@
 
 #define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
 #define MAX_DESC_CHAR_LEN 1000
+#define TASKFILE "tasks"
 
-int read(std::vector<Task> &t_list)
+unsigned int read(std::vector<Task> &t_list)
 {
   //need to find max id somehow (task ids need to be unique)
   std::ifstream in;
-  in.open("output");
-
+  in.open("tasks");
+  
+  unsigned int max_id = 0;
   unsigned int taskid;
   bool is_complete;
   unsigned int priority;
   char input_desc[MAX_DESC_CHAR_LEN];
   std::string desc;
-  while(!in.fail()) 
+  while(!in.fail() && in.is_open()) 
   {
     if (in >> taskid >> is_complete >> priority)
     {
+      if(taskid > max_id)
+      {
+        max_id = taskid;
+      }
       in.getline(input_desc,MAX_DESC_CHAR_LEN,'\n'); 
       desc = input_desc;
       Task task = Task(taskid, is_complete, priority, desc);
@@ -31,13 +37,13 @@ int read(std::vector<Task> &t_list)
       t_list.push_back(task);
     }
   }
-    return 0;
+  return max_id + 1;
 }
 
 int full_write(std::vector<Task> &t_list)
 {
   std::ofstream out;
-  out.open("output", std::ios::out);
+  out.open("tasks", std::ios::out);
 
   for (Task task : t_list)
   {
@@ -57,7 +63,7 @@ int full_write(std::vector<Task> &t_list)
 int write(Task &task)
 {
   std::ofstream out;
-  out.open("output", std::ios::app);
+  out.open("tasks", std::ios::app);
   
   if(out.is_open())
   {
@@ -89,6 +95,7 @@ void new_task(std::vector<Task> &t_list, unsigned int &curr_id)
     std::cin >> priority;
   }
   Task new_task = Task(curr_id, priority, desc);
+  write(new_task);
   t_list.push_back(new_task);
   curr_id++;
 };
@@ -199,6 +206,7 @@ void manage_tasks(std::vector<Task> &t_list)
       if (input == 'y')
       {
         t_list.erase(t_list.begin() + taskid);
+        full_write(t_list);
         break;
       }else {
         continue;
@@ -230,10 +238,10 @@ void manage_tasks(std::vector<Task> &t_list)
 
 int main()
 {
-  unsigned int taskids = 0;
+  unsigned int curr_id = 0;
   char input;
   std::vector<Task> m_task_list;
-  read(m_task_list);
+  curr_id = read(m_task_list);
   while(true)
   {
     std::cout << "Welcome to tivity!" << std::endl;
@@ -246,7 +254,7 @@ int main()
     switch (input) {
       case 'n':
         //Prompt new task menu
-        new_task(m_task_list, taskids);
+        new_task(m_task_list, curr_id);
         break;
       case 'v':
         //prompt view task menu
