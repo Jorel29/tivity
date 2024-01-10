@@ -12,18 +12,10 @@ public:
   void start();
   void stop();
 private:
+  friend class Manager;
+  friend class Writer;
   bool is_running;
-  unsigned int read(std::vector<Task> &t_list);
-  int full_write(std::vectore<Task> &t_list);
-  int write(Task &task);
-  void new_task(std::vector<Task> &t_list, unsigned int &curr_id);
-
+  std::string m_filename;
 };
-
-TaskManager::TaskManager() {
-}
-
-TaskManager::~TaskManager() {
-}
 
 #endif
