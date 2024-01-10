@@ -24,7 +24,9 @@ unsigned int read(std::vector<Task> &t_list)
   unsigned int priority;
   char input_desc[MAX_DESC_CHAR_LEN];
   std::string desc;
-  while(!in.fail() && in.is_open()) 
+  if(!in.is_open()) return max_id;
+
+  while(!in.fail()) 
   {
     if (in >> taskid >> is_complete >> priority)
     {

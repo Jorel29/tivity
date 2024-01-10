@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TASK_H
+#define TASK_H
+
 #include <string>
 
 class Task
@@ -40,3 +42,5 @@ class Task
 
     friend std::ostream& operator<<(std::ostream& os, const Task& t);
 };
+
+#endif
