@@ -8,79 +8,81 @@
 
 #define DBG(txt, x) std::cout<< txt << " " << x << std::endl;
 #define MAX_DESC_CHAR_LEN 1000
-#define TASKFILE "tasks"
 //TODO - Be able to specify which file to read at startup
 //     - Create a task_manager API 
 //     - Specify which functions to expose to the user
-unsigned int read(std::vector<Task> &t_list)
-{
-  //need to find max id somehow (task ids need to be unique)
-  std::ifstream in;
-  in.open("tasks");
-  
-  unsigned int max_id = 0;
-  unsigned int taskid;
-  bool is_complete;
-  unsigned int priority;
-  char input_desc[MAX_DESC_CHAR_LEN];
-  std::string desc;
-  if(!in.is_open()) return max_id;
 
-  while(!in.fail()) 
-  {
-    if (in >> taskid >> is_complete >> priority)
+class Writer{
+  public:
+    static unsigned int read(std::vector<Task> &t_list, std::string filename)
     {
-      if(taskid > max_id)
+      //need to find max id somehow (task ids need to be unique)
+      std::ifstream in;
+      in.open(filename);
+      
+      unsigned int max_id = 0;
+      unsigned int taskid;
+      bool is_complete;
+      unsigned int priority;
+      char input_desc[MAX_DESC_CHAR_LEN];
+      std::string desc;
+      if(!in.is_open()) return max_id;
+
+      while(!in.fail()) 
       {
-        max_id = taskid;
+        if (in >> taskid >> is_complete >> priority)
+        {
+          if(taskid > max_id)
+          {
+            max_id = taskid;
+          }
+          in.getline(input_desc,MAX_DESC_CHAR_LEN,'\n'); 
+          desc = input_desc;
+          Task task = Task(taskid, is_complete, priority, desc);
+          DBG("existing task ", task)
+          t_list.push_back(task);
+        }
       }
-      in.getline(input_desc,MAX_DESC_CHAR_LEN,'\n'); 
-      desc = input_desc;
-      Task task = Task(taskid, is_complete, priority, desc);
-      DBG("existing task ", task)
-      t_list.push_back(task);
+      return max_id + 1;
     }
-  }
-  return max_id + 1;
-}
 
-int full_write(std::vector<Task> &t_list)
-{
-  std::ofstream out;
-  out.open("tasks", std::ios::out);
-
-  for (Task task : t_list)
-  {
-    if(out.is_open())
+    static int full_write(std::vector<Task> &t_list, std::string filename)
     {
-      out << task;
+      std::ofstream out;
+      out.open(filename, std::ios::out);
+
+      for (Task task : t_list)
+      {
+        if(out.is_open())
+        {
+          out << task;
+        }
+        else 
+        {
+          return -1;  
+        }
+      }
+
+      return 0;
     }
-    else 
+
+    static int write(Task &task, std::string filename)
     {
-      return -1;  
+      std::ofstream out;
+      out.open(filename, std::ios::app);
+      
+      if(out.is_open())
+      {
+        out << task;
+      }
+      else 
+      {
+        return -1;
+      }
+      
+      return 0;
     }
-  }
-
-  return 0;
 }
-
-int write(Task &task)
-{
-  std::ofstream out;
-  out.open("tasks", std::ios::app);
-  
-  if(out.is_open())
-  {
-    out << task;
-  }
-  else 
-  {
-    return -1;
-  }
-  
-  return 0;
-}
-
 void new_task(std::vector<Task> &t_list, unsigned int &curr_id)
 {
   std::string desc;
@@ -99,10 +101,10 @@ void new_task(std::vector<Task> &t_list, unsigned int &curr_id)
     std::cin >> priority;
   }
   Task new_task = Task(curr_id, priority, desc);
-  write(new_task);
+  Writer::write(new_task, m_filename);
   t_list.push_back(new_task);
   curr_id++;
-};
+}
 
 void view_tasks(std::vector<Task> &t_list)
 {
@@ -113,8 +115,8 @@ void view_tasks(std::vector<Task> &t_list)
   for (Task a_task : t_list)
   {
     std::cout << a_task << std::endl;
-  };
-};
+  }
+}
 
 void edit_status(Task &task)
 {
@@ -141,7 +143,7 @@ void edit_status(Task &task)
 
   }
 
-};
+}
 
 void set_priority(Task &task)
 {
@@ -157,7 +159,7 @@ void set_priority(Task &task)
   }
   
   task.set_priority(new_priority);
-};
+}
 
 
 void edit_desc(Task &task)
@@ -176,7 +178,7 @@ void edit_desc(Task &task)
   }
 
   task.edit_desc(new_desc);
-};
+}
 
 void manage_tasks(std::vector<Task> &t_list)
 {
@@ -190,7 +192,7 @@ void manage_tasks(std::vector<Task> &t_list)
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Invalid input, input a proper id (positive integer)" << std::endl;
     std::cin >> taskid;
-  };
+  }
 
   std::cout << "Managing task: " << taskid << std::endl;
   Task &managed_task = t_list[taskid];
@@ -237,8 +239,7 @@ void manage_tasks(std::vector<Task> &t_list)
     full_write(t_list);
   }
   
-
-};
+}
 
 int main()
 {
@@ -272,6 +273,6 @@ int main()
         DBG("Invalid input", input)
         break;
     }
-  };
+  }
   return 0;
-};
+}

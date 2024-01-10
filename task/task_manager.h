@@ -12,8 +12,8 @@ public:
   void start();
   void stop();
 private:
-  friend class Manager;
   friend class Writer;
+  friend class Manager;
   bool is_running;
   std::string m_filename;
 };
