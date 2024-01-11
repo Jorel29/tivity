@@ -83,7 +83,7 @@ class Writer{
       
       return 0;
     }
-}
+};
 
 class Manager{
   private:
@@ -285,4 +285,4 @@ class Manager{
       }
       return 0;
     }
-}
+};
