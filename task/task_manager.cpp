@@ -11,7 +11,8 @@
 //TODO - Be able to specify which file to read at startup
 //     - Create a task_manager API 
 //     - Specify which functions to expose to the user
-
+//     - Find out if calling member m_filename is valid
+//     - Check if file actually compiles
 class Writer{
   public:
     static unsigned int read(std::vector<Task> &t_list, std::string filename)
@@ -254,7 +255,7 @@ class Manager{
       unsigned int curr_id = 0;
       char input;
       std::vector<Task> m_task_list;
-      curr_id = read(m_task_list);
+      curr_id = Writer::read(m_task_list, m_filename);
       while(m_is_running)
       {
         std::cout << "Welcome to tivity!" << std::endl;
