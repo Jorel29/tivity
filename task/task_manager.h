@@ -14,7 +14,7 @@ public:
 private:
   friend class Writer;
   friend class Manager;
-  bool is_running;
+  bool m_is_running;
   std::string m_filename;
 };
 
