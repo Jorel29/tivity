@@ -1,3 +1,4 @@
+#include "task_manager.h"
 #include "task.h"
 #include <fstream>
 #include <ios>
@@ -80,10 +81,7 @@ private:
   std::string pm_filename;
 
 public:
-  Manager(std::string filename, bool &is_running) {
-    pm_filename = filename;
-    pm_is_running = is_running;
-  }
+  Manager(std::string &filename) { pm_filename = filename; }
   ~Manager() = default;
 
   void new_task(std::vector<Task> &t_list, unsigned int &curr_id) {
@@ -229,12 +227,12 @@ public:
     }
   }
 
-  int runner() {
+  int start(bool &is_running) {
     unsigned int curr_id = 0;
     char input;
     std::vector<Task> m_task_list;
     curr_id = Writer::read(m_task_list, pm_filename);
-    while (pm_is_running) {
+    while (is_running) {
       std::cout << "Welcome to tivity!" << std::endl;
       std::cout << "New Task (n)   View Tasks (v)   Manage Tasks (m)   Quit(q)"
                 << std::endl;
@@ -260,6 +258,20 @@ public:
         break;
       }
     }
+    is_running = false;
     return 0;
   }
 };
+
+TaskManager::TaskManager(std::string filename) {
+  m_filename = filename;
+  m_is_running = false;
+}
+
+void TaskManager::start() {
+  Manager manager = Manager(m_filename);
+  m_is_running = true;
+  manager.start(m_is_running);
+}
+
+void TaskManager::stop() { m_is_running = false; }
